@@ -1,10 +1,29 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { createRoot } from "react-dom/client";
+import { restaurants } from "./mock.js";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
-)
+
+const rootElement = document.getElementById("root");
+
+const reactRoot = createRoot(rootElement);
+
+reactRoot.render(
+
+    restaurants.map((item) => (
+      <div key={item.id}>
+        {item.name}
+        <h3>Меню</h3>
+        <ul>
+          {item.menu.map((item) => (
+            <li key={item.id}>{item.name}</li>
+          ))}
+        </ul>
+        <h3>Отзывы</h3>
+        <ul>
+          {item.reviews.map((item) => (
+            <li key={item.id}>{item.text}</li>
+          ))}
+        </ul>
+      </div>
+    ))
+
+);
